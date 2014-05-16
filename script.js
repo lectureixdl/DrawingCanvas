@@ -38,6 +38,12 @@ $(document).ready(function() {
 	$('#drawingCanvas').attr("width", window.innerWidth);
 	$('#drawingCanvas').attr("height", window.innerHeight);
 
+	$('#drawingCanvas').on('touchmove',function(e){
+		if(paint){
+			addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+			redraw();
+		}
+	});
 	$('#drawingCanvas').mousedown(function(e){
 		var mouseX = e.pageX - this.offsetLeft;
 		var mouseY = e.pageY - this.offsetTop;
