@@ -33,6 +33,7 @@ function redraw(){
 
 
 $(document).ready(function() {
+	document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
 	context = document.getElementById('drawingCanvas').getContext("2d");
 	$('#drawingCanvas').attr("width", window.innerWidth);
 	$('#drawingCanvas').attr("height", window.innerHeight);
