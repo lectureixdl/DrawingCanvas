@@ -38,12 +38,28 @@ $(document).ready(function() {
 	$('#drawingCanvas').attr("width", window.innerWidth);
 	$('#drawingCanvas').attr("height", window.innerHeight);
 
+	$('#drawingCanvas').on('touchstart', function(e){
+		e = e.originalEvent.touches[0];
+		var mouseX = e.pageX - this.offsetLeft;
+		var mouseY = e.pageY - this.offsetTop;
+		paint = true;
+		addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+		redraw();
+	});
 	$('#drawingCanvas').on('touchmove',function(e){
+		e = e.originalEvent.touches[0];
 		if(paint){
 			addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
 			redraw();
 		}
 	});
+	$('#drawingCanvas').on('touchend',function(e){
+		paint = false;
+	});
+	$('#drawingCanvas').on('touchcancel',function(e){
+		paint = false;
+	});
+	
 	$('#drawingCanvas').mousedown(function(e){
 		var mouseX = e.pageX - this.offsetLeft;
 		var mouseY = e.pageY - this.offsetTop;
@@ -63,6 +79,7 @@ $(document).ready(function() {
 	$('#drawingCanvas').mouseleave(function(e){
 		paint = false;
 	});
+
 });
 
 $(window).on("resize", function() {
